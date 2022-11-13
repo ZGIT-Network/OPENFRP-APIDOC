@@ -239,7 +239,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 ```
 
 > *返回值解释：*
-> ``data`` 数组的每一个组都代表着一条隧道，键值均可使用本表参考。 ``total`` 值为该用户的隧道总数。
+> ``data`` 数组的每一个组都代表着一条隧道，键值均可使用本表参考。 ``total`` 值为该用户的隧道总数。``list`` 既该用户账户下的隧道列表
 > 键名        | 值内容意
 > ----------- | ----------------------------  
 > id    | 此隧道ID（数字）
