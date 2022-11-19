@@ -97,6 +97,8 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
 
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
 ### 请求示例
 
 请求类型：``POST``
@@ -164,6 +166,8 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 * 此 API 可帮助您获取用户当前账户下的所有隧道信息（隧道列表）。
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
 ### 请求示例
 
@@ -264,3 +268,73 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 >connectAddress | 由服务端自动生成的链接此隧道的IP地址（域名方式，若需要数字IP地址可能需要程序手动解析）
 
 ***
+
+## 4. 新建隧道 *``Header``*
+
+>API路径：/frp/api/newProxy
+
+* 此 API 可帮助您为用户当前账户新建一条新的隧道。**您需要搭配获取节点列表API使用，因为这样您才可以获取到节点ID**
+
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
+### 请求示例
+
+请求类型：``POST``
+
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/newProxy``
+
+请求内容：
+
+```json
+{
+    "session": "0ea7223e83d0482cb76eae26b9f7a602",
+    "node_id": 44,
+    "name": "test",
+    "type": "tcp",
+    "local_addr": "127.0.0.1",
+    "local_port": "25565",
+    "remote_port": 27388,
+    "domain_bind": "",
+    "dataGzip": "False",
+    "dataEncrypt": "False",
+    "url_route": "",
+    "host_rewrite": "",
+    "request_from": "",
+    "request_pass": ""
+}
+```
+
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+
+> *提交值解释：*
+> ``data`` 下的键值
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> session    | 会话ID
+> node_id        | 节点ID(纯数字，整数型)
+> name       | 隧道名称(不支持中文)
+> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
+> local_addr     | 本地地址(默认可使用 ``127.0.0.1``)
+> local_port     | 本地端口
+> remote_port | 远程端口
+> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
+> dataGzip          | 是否启用数据压缩（``true``/``false``
+> dataEncrypt       | 是否启用数据加密（``true``/``false``
+> url_route         | URL路由
+> host_rewrite      | HOST重写
+> request_from      | 请求来源
+> request_pass      | 访问密码
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+ "data": null,
+ "flag": true,
+ "msg": "创建成功",
+}
+```
+
+> *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
