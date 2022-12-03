@@ -13,6 +13,16 @@
 >
 >4. 本文中所显示的大多数密钥、会话ID、用户账户与密码均为虚构，不可用于登录等操作。一般情况下，我们会使用演示账户（test@test.com）来进行操作。本文将尽可能保证获取的量一致。
 >
+>5. 我们没有义务为您解决您在开发过程中所遇到的错误问题，在使用过程中所遇到的**大多数**问题都可能与我们**无关**！
+>
+
+***
+
+## OpenFrp OPENAPI 使用条款
+
+在您使用 OpenFrp OPENAPI 时，您 **必须** 在项目的 **显著位置** 注明使用 OpenFrp OPENAPI ，并必须确保用户在显著位置明确可见！若您违反本约定，**我们保留撤销对您使用 OpenFrp OPENAPI 的一切权利**！在使用 OpenFrp OPENAPI 进行商业活动时，必须获得 OpenFrp Project 项目组的**书面协议**授权！
+
+***
 
 **全局键值说明:**
 
@@ -118,7 +128,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 在请求正常的情况下，您会得到以下返回值：
 
 ```json
-    {
+{
     "data": {
         "outLimit": 1536,
         "used": 0,
@@ -361,7 +371,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ```json
 {
-    "proxy_id": 14636,
+    "proxy_id": 11451,
     "session": "0ea7223e83d0482cb76eae26b9f7a602"
 }
 ```
@@ -370,9 +380,9 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 > *提交值解释：*
 > 键名        | 值内容意
-> ----------- | ----------------------------  
+> ----------- |----------------------  
 > session    | 会话ID
-> node_id        | 隧道ID(纯数字，整数型)
+> proxy_id        | 隧道ID(纯数字，整数型)
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -385,3 +395,115 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 ```
 
 > *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道删除操作是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否操作成功，成功为 ``true``。*
+
+## 6. **``GET``** 获取节点列表 *``Header``*
+
+>API路径：/frp/api/getNodeList
+
+* 此 API 可帮助您将用户的选定隧道从账户中删除。**建议您搭配获取用户隧道列表API使用，因为这样您才可以获取到隧道ID**
+
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
+### 请求示例
+
+请求类型：``GET``
+
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getNodeList``
+
+请求内容：
+
+该请求仅需要您GET时附带Authorization即可。
+
+> *``Authorization`` 值请填写登录时获取的会话Authorization，Authorization有效期不明确，可能需要每4小时获取一次，用于进行API鉴权。*
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+ "data": {
+  "total": 27,
+  "list": [
+   {
+    "allowEc": false,
+    "bandwidth": 50,
+    "bandwidthMagnification": 1,
+    "classify": 2,
+    "comments": "部分地区移动绕路 自动HTTPS 域名过白",
+    "group": "vip;svip;admin;",
+    "hostname": "cn-hk-cncn.openfrp.cc",
+    "id": 1,
+    "maxOnlineMagnification": 1,
+    "name": "香港-1 「CN2」",
+    "needRealname": true,
+    "port": 8120,
+    "status": 200,
+    "unitcostEc": 1,
+    "description": "香港-1 「CN2」部分地区移动绕路 自动HTTPS 域名过白",
+    "protocolSupport": {
+     "tcp": true,
+     "udp": true,
+     "xtcp": true,
+     "stcp": true,
+     "http": true,
+     "https": false
+    }
+   },
+   {
+    "allowEc": false,
+    "bandwidth": 5,
+    "bandwidthMagnification": 0.5,
+    "classify": 1,
+    "comments": "阿里云",
+    "group": "normal;vip;svip;admin;",
+    "hostname": "cn-bj-bgp-3.openfrp.top",
+    "id": 41,
+    "maxOnlineMagnification": 3,
+    "name": "北京多线-3",
+    "needRealname": true,
+    "port": 8120,
+    "status": 200,
+    "unitcostEc": 1,
+    "description": "北京多线-3阿里云",
+    "protocolSupport": {
+     "tcp": true,
+     "udp": true,
+     "xtcp": true,
+     "stcp": true,
+     "http": false,
+     "https": false
+    }
+   },
+   ...
+  ]
+ },
+ "flag": true,
+ "msg": "ok"
+}
+```
+
+**因实际节点列表JSON信息过长，本文仅截取前两个节点作演示**
+
+> *返回值解释：*
+> ``data`` 数组的每一个组都代表一个节点的信息，键值均可使用本表参考。 ``total`` 值为OpenFrp当前节点总数。``list`` 既所有节点的详细信息
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> allowEc    | 是否允许弹性隧道* （尚未启用）
+> bandwidth        | 节点的带宽数
+> bandwidthMagnification       | 节点设计的带宽倍率（换算公式：用户速率*带宽倍率 = 实际获得速率）
+> classify    | 节点所属区域（``1`` 中国大陆、``2`` 港澳台地区、``3``海外地区 ）
+> comments     | 节点的标签（如：推荐建站 等）
+> group     | 当前节点所允许使用的用户组（normal即普通用户若用户的用户组不存在于此内容内，创建隧道会被服务器拒绝）
+> hostname | 节点所属主机名（节点域名）
+> id     | 节点ID
+> maxOnlineMagnification          | 在线倍率
+> name       | 此隧道的HOST重写
+> needRealname    | 节点是否需要用户实名认证
+> port       | 节点运行端口
+> status      | 节点状态（可参考[HTTP状态码](https://www.runoob.com/http/http-status-codes.html)）
+> unitcostEc  |   隧道单价
+> description | 节点介绍
+> protocolSupport | 节点所支持的隧道类型(包括 ``tcp udp http https stcp xtcp`` 使用 ``true`` / ``false``作为区分是否准许，此处不再做详细解释)
+
+***
