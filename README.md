@@ -338,3 +338,50 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 ```
 
 > *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
+
+***
+
+## 5. 删除隧道 *``Header``*
+
+>API路径：/frp/api/removeProxy
+
+* 此 API 可帮助您将用户的选定隧道从账户中删除。**建议您搭配获取用户隧道列表API使用，因为这样您才可以获取到隧道ID**
+
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
+### 请求示例
+
+请求类型：``POST``
+
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/removeProxy``
+
+请求内容：
+
+```json
+{
+    "proxy_id": 14636,
+    "session": "0ea7223e83d0482cb76eae26b9f7a602"
+}
+```
+
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+
+> *提交值解释：*
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> session    | 会话ID
+> node_id        | 隧道ID(纯数字，整数型)
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+ "data": null,
+ "flag": true,
+ "msg": "操作成功"
+}
+```
+
+> *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道删除操作是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否操作成功，成功为 ``true``。*
