@@ -105,7 +105,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 * 此 API 可帮助您获取用户账户的所有信息，非常有用。
 
-本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
 会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
@@ -175,7 +175,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 * 此 API 可帮助您获取用户当前账户下的所有隧道信息（隧道列表）。
 
-本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
 会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
@@ -285,7 +285,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 * 此 API 可帮助您为用户当前账户新建一条新的隧道。**您需要搭配获取节点列表API使用，因为这样您才可以获取到节点ID**
 
-本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
 会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
@@ -357,7 +357,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 * 此 API 可帮助您将用户的选定隧道从账户中删除。**建议您搭配获取用户隧道列表API使用，因为这样您才可以获取到隧道ID**
 
-本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
 会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
@@ -402,7 +402,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 * 此 API 可帮助您将用户的选定隧道从账户中删除。**建议您搭配获取用户隧道列表API使用，因为这样您才可以获取到隧道ID**
 
-本 API 需要用户已登录，程序已获取用户的会话ID和Authorization内容，并将Authorization写入到header中。
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
 会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
@@ -507,3 +507,47 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > protocolSupport | 节点所支持的隧道类型(包括 ``tcp udp http https stcp xtcp`` 使用 ``true`` / ``false``作为区分是否准许，此处不再做详细解释)
 
 ***
+
+## 5. 签到 *``Header``*
+
+>API路径：/frp/api/userSign
+
+* 此 API 可帮助用户调用签到API签到获取流量。**注意：您不应该设计任何有关自动签到的相关功能，因为这是违反服务条款的行为，自动签到为滥用行为行为之一。**
+* **建议您在签到执行并获得回调后搭配获取用户信息API使用，以探测流量更新。**
+
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
+### 请求示例
+
+请求类型：``POST``
+
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/userSign``
+
+请求内容：
+
+```json
+{
+    "session": "0ea7223e83d0482cb76eae26b9f7a602"
+}
+```
+
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+
+> *提交值解释：*
+> 键名        | 值内容意
+> ----------- |----------------------  
+> session    | 会话ID
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+    "data":"签到成功，获得 4430 Mib + 额外 10 Mib 流量",
+    "flag":true,
+    "msg":"OK"
+}
+```
+
+> *注意：此API返回值的 ``data`` 项包含多种信息，其包括签到是否成功的信息内容，需要注意。若用户已经签到，此API的 ``data`` 项返回为 ``"你今天已经签到过啦"`` 。*
