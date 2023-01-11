@@ -20,9 +20,12 @@
 
 ## OpenFrp OPENAPI 使用条款
 
-在您使用 OpenFrp OPENAPI 时，您 **必须** 在项目的 **显著位置** 注明使用 OpenFrp OPENAPI ，并必须确保用户在显著位置明确可见！若您违反本约定，**我们保留撤销对您使用 OpenFrp OPENAPI 的一切权利**！在使用 OpenFrp OPENAPI 进行商业活动时，必须获得 OpenFrp Project 项目组的**书面协议**授权！
+在您使用 OpenFrp OPENAPI 时，您 **必须** 在项目的 **明显可见位置** 注明使用 OpenFrp OPENAPI ，若要出于美观考虑可尝试降低饱和色，不应恶意隐藏相关内容！若您违反本约定，**我们保留撤销对您使用 OpenFrp OPENAPI 的一切权利**！在使用 OpenFrp OPENAPI 进行商业活动时，必须获得 OpenFrp Project 项目组的**书面协议**授权！
 
 ***
+
+传输 JSON 数据时的 ``content-type`` 均使用 ``application/json``，
+如登录等API请直接传输 ``body``
 
 **全局键值说明:**
 
@@ -124,7 +127,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 }
 ```
 
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为8小时，可能需要每8小时更新一次(重新登录)。*
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -194,7 +197,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 }
 ```
 
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为8小时，可能需要每8小时更新一次(重新登录)。*
 
 在请求正常的情况下，您会得到以下返回值：
 
