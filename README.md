@@ -316,7 +316,8 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
     "url_route": "",
     "host_rewrite": "",
     "request_from": "",
-    "request_pass": ""
+    "request_pass": "",
+    "custom": ""
 }
 ```
 
@@ -334,12 +335,13 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > local_port     | 本地端口
 > remote_port | 远程端口
 > domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
-> dataGzip          | 是否启用数据压缩（``true``/``false``
-> dataEncrypt       | 是否启用数据加密（``true``/``false``
+> dataGzip          | 是否启用数据压缩（``true``/``false``）
+> dataEncrypt       | 是否启用数据加密（``true``/``false``）
 > url_route         | URL路由
 > host_rewrite      | HOST重写
 > request_from      | 请求来源
 > request_pass      | 访问密码
+> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -352,7 +354,8 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 ```
 
 > *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
-
+* 建议在新建隧道操作完成后，重新请求获取用户隧道列表。
+* 
 ***
 
 ## 5. 删除隧道 *``Header``*
@@ -412,11 +415,17 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ### 请求示例
 
-请求类型：``GET``
+请求类型：``POST``
 
 请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getNodeList``
 
 请求内容：
+
+```json
+{
+    "session": "0ea7223e83d0482cb76eae26b9f7a602"
+}
+```
 
 该请求仅需要您GET时附带Authorization即可。
 
@@ -426,64 +435,68 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ```json
 {
- "data": {
-  "total": 27,
-  "list": [
-   {
-    "allowEc": false,
-    "bandwidth": 50,
-    "bandwidthMagnification": 1,
-    "classify": 2,
-    "comments": "部分地区移动绕路 自动HTTPS 域名过白",
-    "group": "vip;svip;admin;",
-    "hostname": "cn-hk-cncn.openfrp.cc",
-    "id": 1,
-    "maxOnlineMagnification": 1,
-    "name": "香港-1 「CN2」",
-    "needRealname": true,
-    "port": 8120,
-    "status": 200,
-    "unitcostEc": 1,
-    "description": "香港-1 「CN2」部分地区移动绕路 自动HTTPS 域名过白",
-    "protocolSupport": {
-     "tcp": true,
-     "udp": true,
-     "xtcp": true,
-     "stcp": true,
-     "http": true,
-     "https": false
-    }
-   },
-   {
-    "allowEc": false,
-    "bandwidth": 5,
-    "bandwidthMagnification": 0.5,
-    "classify": 1,
-    "comments": "阿里云",
-    "group": "normal;vip;svip;admin;",
-    "hostname": "cn-bj-bgp-3.openfrp.top",
-    "id": 41,
-    "maxOnlineMagnification": 3,
-    "name": "北京多线-3",
-    "needRealname": true,
-    "port": 8120,
-    "status": 200,
-    "unitcostEc": 1,
-    "description": "北京多线-3阿里云",
-    "protocolSupport": {
-     "tcp": true,
-     "udp": true,
-     "xtcp": true,
-     "stcp": true,
-     "http": false,
-     "https": false
-    }
-   },
-   ...
-  ]
- },
- "flag": true,
- "msg": "ok"
+	"data": {
+		"total": 39,
+		"list": [
+			{
+				"allowEc": false,
+				"bandwidth": 50,
+				"bandwidthMagnification": 1,
+				"classify": 2,
+				"comments": "双程CN2GIA CUVIP CMI",
+				"group": "vip;svip;admin;dev",
+				"hostname": "您无权查询此节点的地址",
+				"id": 1,
+				"maxOnlineMagnification": 1,
+				"name": "香港-1「CN2」",
+				"needRealname": true,
+				"port": "您无权查询此节点的地址",
+				"status": 200,
+				"unitcostEc": 1,
+				"description": "香港-1「CN2」双程CN2GIA CUVIP CMI",
+				"protocolSupport": {
+					"tcp": true,
+					"udp": true,
+					"xtcp": false,
+					"stcp": false,
+					"http": true,
+					"https": true
+				},
+				"allowPort": null,
+				"fullyLoaded": false
+			},
+			{
+				"allowEc": false,
+				"bandwidth": 100,
+				"bandwidthMagnification": 1,
+				"classify": 2,
+				"comments": "去程HKBN 回程HKIX|CERA->CMI",
+				"group": "vip;svip;admin;dev",
+				"hostname": "您无权查询此节点的地址",
+				"id": 2,
+				"maxOnlineMagnification": 0.4,
+				"name": "香港-2「BGP」",
+				"needRealname": true,
+				"port": "您无权查询此节点的地址",
+				"status": 200,
+				"unitcostEc": 1,
+				"description": "香港-2「BGP」去程HKBN 回程HKIX|CERA->CMI",
+				"protocolSupport": {
+					"tcp": true,
+					"udp": true,
+					"xtcp": false,
+					"stcp": false,
+					"http": true,
+					"https": true
+				},
+				"allowPort": null,
+				"fullyLoaded": false
+			},
+            ...
+		]
+	},
+	"flag": true,
+	"msg": "OK"
 }
 ```
 
@@ -499,20 +512,92 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > classify    | 节点所属区域（``1`` 中国大陆、``2`` 港澳台地区、``3``海外地区 ）
 > comments     | 节点的标签（如：推荐建站 等）
 > group     | 当前节点所允许使用的用户组（normal即普通用户若用户的用户组不存在于此内容内，创建隧道会被服务器拒绝）
-> hostname | 节点所属主机名（节点域名）
+> hostname | 节点所属主机名（节点域名）    或者    “您无权查询此节点的地址”
 > id     | 节点ID
 > maxOnlineMagnification          | 在线倍率
-> name       | 此隧道的HOST重写
-> needRealname    | 节点是否需要用户实名认证
+> name       | 节点名称
+> needRealname    | 节点运行端口    或者    “您无权查询此节点的地址”
 > port       | 节点运行端口
-> status      | 节点状态（可参考[HTTP状态码](https://www.runoob.com/http/http-status-codes.html)）
+> status      | 节点状态（可参考[HTTP状态码](https://www.runoob.com/http/http-status-codes.html)）（200为正常）
 > unitcostEc  |   隧道单价
 > description | 节点介绍
-> protocolSupport | 节点所支持的隧道类型(包括 ``tcp udp http https stcp xtcp`` 使用 ``true`` / ``false``作为区分是否准许，此处不再做详细解释)
+> protocolSupport | 节点所支持的隧道类型，更新为子元素单独显示(包括 ``tcp udp http https stcp xtcp`` 使用 ``true`` / ``false``作为区分是否准许，此处不再做详细解释)
+> allowPort  |  允许的端口（为null或者""则为无端口段限制，例如"``(50000,60000)``"则为远程端口限制在50000-60000之间均可使用）
+> fullyLoaded | 节点负载状态（ ``true`` / ``false`` 状态为 ``true`` 时节点满载不可，新建隧道）
 
 ***
 
-## 7. 签到 *``Header``*
+## 7. 编辑隧道 *``Header``*
+
+>API路径：/frp/api/editProxy
+
+* 此 API 可帮助您为用户当前账户新建一条新的隧道。**您需要搭配获取节点列表API使用，因为这样您才可以获取到节点ID**
+
+本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
+
+会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+
+### 请求示例
+
+请求类型：``POST``
+
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/editProxy``
+
+请求内容：
+
+```json   
+{
+	"name": "ssh1",
+	"node_id": 0,
+	"local_addr": "127.0.0.1",
+	"local_port": 22,
+	"remote_port": 28020,
+	"domain_bind": "[]",
+	"dataGzip": false,
+	"dataEncrypt": false,
+	"custom": "",
+	"type": "tcp",
+	"proxy_id": 49200,
+	"session": "0ea7223e83d0482cb76eae26b9f7a602",
+}
+```
+
+> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
+
+> *提交值解释：*
+> ``data`` 下的键值
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> session    | 会话ID
+> node_id        | 节点ID(纯数字，整数型)
+> name       | 隧道名称(不支持中文)
+> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
+> local_addr     | 本地地址(默认可使用 ``127.0.0.1``)
+> local_port     | 本地端口
+> remote_port | 远程端口
+> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
+> dataGzip          | 是否启用数据压缩（``true``/``false``）
+> dataEncrypt       | 是否启用数据加密（``true``/``false``）
+> url_route         | URL路由
+> host_rewrite      | HOST重写
+> request_from      | 请求来源
+> request_pass      | 访问密码
+> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+ "data": null,
+ "flag": true,
+ "msg": "创建成功",
+}
+```
+
+> *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
+
+
+## 8. 签到 *``Header``*
 
 >API路径：/frp/api/userSign
 
