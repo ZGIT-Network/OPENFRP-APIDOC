@@ -220,7 +220,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
    "sk": "",
    "headerXFromWhere": "",
    "status": true,
-   "node": 5,
+   "nid": 5,
    "lastUpdate": 1641049420.000000000,
    "lastLogin": 1660474229.000000000,
    "friendlyNode": "杭州多线1",
@@ -241,7 +241,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
    "sk": "",
    "headerXFromWhere": "",
    "status": true,
-   "node": 21,
+   "nid": 21,
    "lastUpdate": 1642085623.000000000,
    "lastLogin": 1660474299.000000000,
    "friendlyNode": "北京联通",
@@ -274,7 +274,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > sk       | 此隧道的访问密码
 >headerXFromWhere      | 此隧道的请求来源
 >status  |   此隧道状态(面板状态，禁用状态无法启动隧道)（``true``/``false``）
->node | 此隧道所属的节点号（数字）
+>nid | 此隧道所属的节点号（数字）
 >lastUpdate | 此隧道最后一次更新隧道的时间(修改隧道时间)（Unix时间戳）
 >lastLogin | 此隧道最后一次在线时间(当前隧道最后一次启动时间)（Unix时间戳）
 >friendlyNode | 此隧道所属的节点文本名称（文本）
