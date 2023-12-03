@@ -63,7 +63,7 @@
 
 请求类型：``POST``
 
-请求地址：``https://openid.17a.icu/api/public/login``
+请求地址：``https://openid.17a.ink/api/public/login``
 
 请求内容：
 
@@ -93,7 +93,7 @@
 
 请求类型：``POST``
 
-请求地址：``https://openid.17a.icu/api/oauth2/authorize?response_type=code&redirect_uri=http:%2F%2Fconsole.openfrp.net%2Foauth_callback&client_id=openfrp``
+请求地址：``https://openid.17a.ink/api/oauth2/authorize?response_type=code&redirect_uri=https://of-dev-api.bfsea.xyz/oauth_callback&client_id=openfrp``
 
 请求内容：无  
 
