@@ -51,17 +51,19 @@
 ## 1. Login 登录API
 
 >API路径：
->/user/login
+>/oauth2/callback?code=
 
+> [!IMPORTANT]
+> 您需要先根据以下步骤请求统一登陆请求接口（Oauth 2.0标准），即 Natayark ID ( 或亦称 Natayark OpenID )后，通过将回调得到的`code`传输给此API，方可获得正确的返回信息。
 * 此 API 可帮助您通过账号密码登录到 OpenFrp，除获取节点信息和获取公告外，均需要登录获取会话ID与API认证信息才可用。
 
-本 API 需要这些内容：用户账户（用户名或邮箱）、用户密码
+### (1) 使用用户账户及密码请求统一登陆请求接口
 
-### 请求示例
+本 API 需要这些内容：用户账户（用户名或邮箱）、用户密码  
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/user/login``
+请求地址：``https://openid.17a.icu/api/public/login``
 
 请求内容：
 
@@ -72,7 +74,50 @@
 } 
 ```
 
->*``User``项支持用户名或邮箱(不区分大小写)，``Password``项请使用明文传输(区分大小写)*
+>*``user``项支持用户名或邮箱(不区分大小写)，``password``项请使用明文传输(区分大小写)*
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+    "code": 200,
+    "msg": "login success, welcome",
+    "data": null,
+    "flag": true
+}
+```
+
+### (2) 通过回调地址获取请求API需要的`code`
+
+本 API 需要的前提条件：已请求统一登陆请求接口  
+
+请求类型：``POST``
+
+请求地址：``https://openid.17a.icu/api/oauth2/authorize?response_type=code&redirect_uri=http:%2F%2Fconsole.openfrp.net%2Foauth_callback&client_id=openfrp``
+
+请求内容：无  
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+    "code": 200,
+    "msg": "query ok",
+    "data": {"code": "你看到的code", "state": ""},
+    "flag": true
+}
+
+```
+
+### (3) 通过传输`code`登录
+
+本 API 需要这些内容：回调OAuth接口得到的`code`
+
+请求类型：``POST``
+
+请求地址：``https://of-dev-api.bfsea.xyz/oauth2/callback?code=``拼接上回调OAuth接口得到的`code`
+
+请求内容：无
 
 在请求正常的情况下，您会得到以下返回值：
 
