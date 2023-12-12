@@ -44,6 +44,10 @@
 **目前, OpenFrp API地址为：**
 >**<https://of-dev-api.bfsea.xyz>**
 
+**同时，您现在可以使用：**
+>**<https://api.openfrp.net>**
+请求API
+
 您可通过在地址后添加路径来访问API，下文仅向您提供相关API路径以供您参考。
 
 ***
