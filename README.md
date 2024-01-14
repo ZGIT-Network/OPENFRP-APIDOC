@@ -121,7 +121,7 @@
 
 请求地址：``https://of-dev-api.bfsea.xyz/oauth2/callback?code=``拼接上回调OAuth接口得到的`code`
 
-请求内容：无
+请求内容：无  
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -160,23 +160,13 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
-
 ### 请求示例
 
 请求类型：``POST``
 
 请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getUserInfo``
 
-请求内容：
-
-```json
-{
-    "session": "0ea7223e83d0482cb76eae26b9f7a602"
-}
-```
-
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为8小时，可能需要每8小时更新一次(重新登录)。*
+请求内容：无，仅需要您POST时附带Authorization即可。  
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -230,7 +220,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
 ### 请求示例
 
@@ -238,15 +227,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getUserProxies``
 
-请求内容：
-
-```json
-{
-    "session": "0ea7223e83d0482cb76eae26b9f7a602"
-}
-```
-
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为8小时，可能需要每8小时更新一次(重新登录)。*
+请求内容：无，仅需要您POST时附带Authorization即可。  
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -340,7 +321,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
 
 ### 请求示例
 
@@ -352,7 +332,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ```json
 {
-    "session": "0ea7223e83d0482cb76eae26b9f7a602",
     "node_id": 44,
     "name": "test",
     "type": "tcp",
@@ -370,13 +349,10 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 }
 ```
 
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
-
 > *提交值解释：*
 > ``data`` 下的键值
 > 键名        | 值内容意
 > ----------- | ----------------------------  
-> session    | 会话ID
 > node_id        | 节点ID(纯数字，整数型)
 > name       | 隧道名称(不支持中文)
 > type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
@@ -415,8 +391,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
-
 ### 请求示例
 
 请求类型：``POST``
@@ -428,7 +402,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 ```json
 {
     "proxy_id": 11451,
-    "session": "0ea7223e83d0482cb76eae26b9f7a602"
 }
 ```
 
@@ -460,23 +433,13 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
-
 ### 请求示例
 
 请求类型：``POST``
 
 请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getNodeList``
 
-请求内容：
-
-```json
-{
-    "session": "0ea7223e83d0482cb76eae26b9f7a602"
-}
-```
-
-该请求仅需要您GET时附带Authorization即可。
+请求内容：无，仅需要您POST时附带Authorization即可。  
 
 > *``Authorization`` 值请填写登录时获取的会话Authorization，Authorization有效期不明确，可能需要每4小时获取一次，用于进行API鉴权。*
 
@@ -584,8 +547,6 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
-
 ### 请求示例
 
 请求类型：``POST``
@@ -596,42 +557,43 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ```json   
 {
-	"name": "ssh1",
-	"node_id": 0,
+	"custom": null,
+	"dataEncrypt": false,
+	"dataGzip": false,
+	"domain_bind": null,
+	"host_rewrite": null,
 	"local_addr": "127.0.0.1",
 	"local_port": 22,
-	"remote_port": 28020,
-	"domain_bind": "[]",
-	"dataGzip": false,
-	"dataEncrypt": false,
-	"custom": "",
-	"type": "tcp",
+	"name": "ssh1",
+	"node_id": 0,
 	"proxy_id": 49200,
-	"session": "0ea7223e83d0482cb76eae26b9f7a602",
+	"remote_port": 28020,
+	"request_from": null,
+	"request_pass": null,
+	"type": "tcp",
+	"url_route": null,
 }
 ```
-
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
 
 > *提交值解释：*
 > ``data`` 下的键值
 > 键名        | 值内容意
 > ----------- | ----------------------------  
-> session    | 会话ID
-> node_id        | 节点ID(纯数字，整数型)
-> name       | 隧道名称(不支持中文)
-> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
+> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
+> dataEncrypt       | 是否启用数据加密（``true``/``false``）
+> dataGzip          | 是否启用数据压缩（``true``/``false``）
+> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
+> host_rewrite      | HOST重写
 > local_addr     | 本地地址(默认可使用 ``127.0.0.1``)
 > local_port     | 本地端口
+> name       | 隧道名称(不支持中文)
+> node_id        | 节点ID(纯数字，整数型)
+> proxy_id       | 隧道ID(纯数字，整数型)
 > remote_port | 远程端口
-> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
-> dataGzip          | 是否启用数据压缩（``true``/``false``）
-> dataEncrypt       | 是否启用数据加密（``true``/``false``）
-> url_route         | URL路由
-> host_rewrite      | HOST重写
 > request_from      | 请求来源
 > request_pass      | 访问密码
-> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
+> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
+> url_route         | URL路由
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -639,7 +601,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 {
  "data": null,
  "flag": true,
- "msg": "创建成功",
+ "msg": "保存成功",
 }
 ```
 
@@ -650,42 +612,40 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 >API路径：/frp/api/userSign
 
-* 此 API 可帮助用户调用签到API签到获取流量。**注意：您不应该设计任何有关自动签到的相关功能，因为这是违反服务条款的行为，自动签到为滥用行为行为之一。**
+~~* 此 API 可帮助用户调用签到API签到获取流量。**注意：您不应该设计任何有关自动签到的相关功能，因为这是违反服务条款的行为，自动签到为滥用行为行为之一。**
 * **建议您在签到执行并获得回调后搭配获取用户信息API使用，以探测流量更新。**
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-会话ID仍使用 ``0ea7223e83d0482cb76eae26b9f7a602`` 为示例
+[!IMPORTANT] 
+由于我们近期为签到功能加入了人机验证，故此处内容暂不可供参考。
 
-### 请求示例
+### 请求示例~~
 
 请求类型：``POST``
 
 请求地址：``https://of-dev-api.bfsea.xyz/frp/api/userSign``
 
-请求内容：
+~~请求内容：~~
 
-```json
+~~```json~~
 {
-    "session": "0ea7223e83d0482cb76eae26b9f7a602"
 }
-```
+~~```~~
 
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
 
-> *提交值解释：*
-> 键名        | 值内容意
-> ----------- |----------------------  
-> session    | 会话ID
+~~> *提交值解释：*~~
+~~> 键名        | 值内容意~~
+~~> ----------- |----------------------  ~~
 
-在请求正常的情况下，您会得到以下返回值：
+~~在请求正常的情况下，您会得到以下返回值：~~
 
-```json
+~~```json~~
 {
     "data":"签到成功，获得 4430 Mib + 额外 10 Mib 流量",
     "flag":true,
     "msg":"OK"
 }
-```
+~~```~~
 
-> *注意：此API返回值的 ``data`` 项包含多种信息，其包括签到是否成功的信息内容，需要注意。若用户已经签到，此API的 ``data`` 项返回为 ``"你今天已经签到过啦"`` 。*
+~~> *注意：此API返回值的 ``data`` 项包含多种信息，其包括签到是否成功的信息内容，需要注意。若用户已经签到，此API的 ``data`` 项返回为 ``"你今天已经签到过啦"`` 。*~~
