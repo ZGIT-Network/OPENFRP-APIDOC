@@ -617,14 +617,14 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
-[!IMPORTANT] 
-由于我们近期为签到功能加入了人机验证，故此处内容暂不可供参考。
+> [!IMPORTANT] 
+> 由于我们近期为签到功能加入了人机验证，此处内容暂不可供参考。
 
-### 请求示例~~
+~~### 请求示例~~
 
-请求类型：``POST``
+~~请求类型：``POST``~~
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/userSign``
+~~请求地址：``https://of-dev-api.bfsea.xyz/frp/api/userSign``~~
 
 ~~请求内容：~~
 
