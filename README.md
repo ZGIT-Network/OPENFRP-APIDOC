@@ -187,7 +187,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
         "used": 0,
         "token": "e900d8f2498202114ec2e9b0597dfb66",
         "realname": false,
-        "regTime": 1626512283.000000000,
+        "regTime": "2022-04-06 11:39:01",
         "inLimit": 1536,
         "friendlyGroup": "普通用户",
         "proxies": 4,
@@ -210,7 +210,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > used        | 已用隧道（条）
 > token       | 用户密钥（32位字符）
 > realname    | 是否已进行实名认证（已认证为 ``true`` ，未认证为 ``false`` 。）
-> regTime     | 注册时间（Unix时间戳）
+> regTime     | 注册时间
 > inLimit     | 下行带宽（Kbps）
 > friendlyGroup | 用户组名称（文字格式友好名称，可直接输出显示。）
 > proxies     | 总共隧道条数（条）
