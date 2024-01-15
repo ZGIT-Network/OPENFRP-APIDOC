@@ -405,12 +405,9 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 }
 ```
 
-> *``session`` 值请填写登录时获取的会话ID，会话ID有效期为4小时，可能需要每4小时更新一次(重新登录)。*
-
 > *提交值解释：*
 > 键名        | 值内容意
 > ----------- |----------------------  
-> session    | 会话ID
 > proxy_id        | 隧道ID(纯数字，整数型)
 
 在请求正常的情况下，您会得到以下返回值：
