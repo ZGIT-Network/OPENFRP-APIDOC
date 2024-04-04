@@ -229,87 +229,87 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求内容：无，仅需要您POST时附带Authorization即可。  
 
-在请求正常的情况下，您会得到以下返回值：
+在请求正常的情况下，您会得到以下类似返回值：
 
 ```json
 {
- "data": {
-  "total": 2,
-  "list": [{
-   "id": 11451,
-   "proxyName": "test",
-   "proxyType": "tcp",
-   "localIp": "127.0.0.1",
-   "localPort": 1234,
-   "useEncryption": true,
-   "useCompression": false,
-   "domain": "",
-   "locations": "",
-   "hostHeaderRewrite": "",
-   "remotePort": 11451,
-   "sk": "",
-   "headerXFromWhere": "",
-   "status": true,
-   "nid": 5,
-   "lastUpdate": 1641049420.000000000,
-   "lastLogin": 1660474229.000000000,
-   "friendlyNode": "杭州多线1",
-   "online": false,
-   "connectAddress": "cn-hz-bgp-1.openfrp.top:11451"
-  }, {
-   "id": 19198,
-   "proxyName": "test2",
-   "proxyType": "tcp",
-   "localIp": "127.0.0.1",
-   "localPort": 1234,
-   "useEncryption": true,
-   "useCompression": true,
-   "domain": "",
-   "locations": "",
-   "hostHeaderRewrite": "",
-   "remotePort": 11451,
-   "sk": "",
-   "headerXFromWhere": "",
-   "status": true,
-   "nid": 21,
-   "lastUpdate": 1642085623.000000000,
-   "lastLogin": 1660474299.000000000,
-   "friendlyNode": "北京联通",
-   "online": false,
-   "connectAddress": "cn-bj-plc-300.openfrp.cc:11451"
-  },{
-    ...
-  }]
- },
- "flag": true,
- "msg": "ok"
+    "data": {
+        "total": 2,
+        "list": [{
+            "connectAddress": "homoaddr.com",
+            "custom": "homo=true",
+            "domain": "[\"homoaddr.com\"]",
+            "forceHttps": false,
+            "friendlyNode": "日本-1",
+            "id": 32933,
+            "lastLogin": 1687449600000,
+            "lastUpdate": 1687449600100,
+            "localIp": "19.19.81.0",
+            "localPort": 5173,
+            "nid": 6,
+            "online": false,
+            "proxyName": "homo_web",
+            "proxyProtocolVersion": false,
+            "proxyType": "https",
+            "status": true,
+            "uid": 19198,
+            "useCompression": true,
+            "useEncryption": true
+        },
+        {
+            "autoTls": "false",
+            "connectAddress": "cn-cq-plc-1.of-7af93c01.shop:51607",
+            "forceHttps": false,
+            "friendlyNode": "重庆联通-2",
+            "id": 120623,
+            "lastUpdate": 1687449600900,
+            "localIp": "11.45.1.4",
+            "localPort": 11451,
+            "nid": 41,
+            "online": false,
+            "proxyName": "foo",
+            "proxyProtocolVersion": false,
+            "proxyType": "tcp",
+            "remotePort": 1892,
+            "status": true,
+            "uid": 19198,
+            "useCompression": false,
+            "useEncryption": false,
+            "lastLogin": null
+        },
+        ...
+        ]
+    },
+    "flag": true,
+    "msg": "ok"
 }
 ```
 
-> *返回值解释：*
-> ``data`` 数组的每一个组都代表着一条隧道，键值均可使用本表参考。 ``total`` 值为该用户的隧道总数。``list`` 既该用户账户下的隧道列表
-> 键名        | 值内容意
-> ----------- | ----------------------------  
-> id    | 此隧道ID（数字）
-> proxyName        | 此隧道名称（文本）
-> proxyType       | 此隧道类型（包括: ``tcp udp http https stcp xtcp``）
-> localIp    | 此隧道的本地IP地址
-> localPort     | 此隧道的本地端口
-> useEncryption     | 此隧道是否启用数据加密（``true``/``false``）
-> useCompression | 此隧道是否启用数据压缩（``true``/``false``）
-> domain     | 此绑定的域名（仅HTTP/S）
-> locations          | 此的URL路由
-> hostHeaderRewrite       | 此隧道的HOST重写
-> remotePort    | 此隧道的远程端口
-> sk       | 此隧道的访问密码
->headerXFromWhere      | 此隧道的请求来源
->status  |   此隧道状态(面板状态，禁用状态无法启动隧道)（``true``/``false``）
->nid | 此隧道所属的节点号（数字）
->lastUpdate | 此隧道最后一次更新隧道的时间(修改隧道时间)（Unix时间戳）
->lastLogin | 此隧道最后一次在线时间(当前隧道最后一次启动时间)（Unix时间戳）
->friendlyNode | 此隧道所属的节点文本名称（文本）
->online | 此隧道当前在线状态（请求时刷新状态，状态由服务端返回数据）
->connectAddress | 由服务端自动生成的链接此隧道的IP地址（域名方式，若需要数字IP地址可能需要程序手动解析）
+> ***返回值解释：***
+> `data` 数组的每一个组都代表着一条隧道，键值均可使用本表参考。 `total` 值为该用户的隧道总数。`list` 既该用户账户下的隧道列表
+> 键名        | 值内容意 |
+> ----------- | ---------------------------- |
+> autoTls | 自动TLS（仅较新的隧道，`"true"` `"false"` `"对应目录下证书名称"`） |
+> connectAddress | 由服务端自动生成的连接地址（返回`域名:端口`，IP需自行解析获取） |
+> custom | 用户隧道的自定义配置文件（仅设置了的隧道） |
+> domain | 此绑定的域名（仅HTTP/S） |
+> forceHttps | 此隧道是否强制使用HTTPS（`true`/`false`） |
+> friendlyNode | 此隧道所属的节点名称（文本） |
+> id | 此隧道ID（数字） |
+> nid | 此隧道所属的节点号（数字） |
+> uid | 此隧道拥有者的注册ID（数字） |
+> proxyName | 此隧道名称（文本） |
+> proxyProtocolVersion | 此隧道是否启用 proxy协议（`true`/`false`） |
+> proxyType | 此隧道类型（`tcp` `udp` `http` `https` `stcp` `xtcp` 等） |
+> lastUpdate | 此隧道最后一次修改的时间（Unix时间戳） |
+> lastLogin | 此隧道最后一次启动的时间（Unix时间戳，从未启动则返回`null`） |
+> localIp | 此隧道的本地IP地址 |
+> localPort | 此隧道的本地端口 |
+> online | 此隧道当前在线状态（请求时刷新状态，状态由服务端返回数据） |
+> status | 此隧道是否被启用（`true`/`false`） |
+> useEncryption | 此隧道是否启用数据加密（`true`/`false`） |
+> useCompression | 此隧道是否启用数据压缩（`true`/`false`） |
+
 
 ***
 
