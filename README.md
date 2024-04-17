@@ -4,8 +4,7 @@
 
 >## 阅读前请注意
 >
->1. **注意：** OpenFrp API 均使用 POST/GET 方式请求，并
->JSON 格式请求。
+>1. **注意：** OpenFrp OPENAPI 均以`POST`/`GET`方式请求，请求格式为`JSON`。
 >
 >2. 本文将采用 Postman 工具做请求示例，您可自行前往 Postman 官网下载参照。
 >
@@ -14,6 +13,8 @@
 >4. 本文中所显示的大多数密钥、会话ID、用户账户与密码均为虚构，不可用于登录等操作。一般情况下，我们会使用演示账户（test@test.com）来进行操作。本文将尽可能保证获取的量一致。
 >
 >5. 我们没有义务为您解决您在开发过程中所遇到的错误问题，在使用过程中所遇到的**大多数**问题都可能与我们**无关**！
+>
+>6. 本文列出的 API *某些地方*可能过时或者有误了，所以欢迎您在使用的同时，帮助我们更新修订本文档。（您可通过提交pr或issue等方式来帮助我们）:-)
 >
 
 ***
@@ -332,41 +333,39 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ```json
 {
-    "node_id": 44,
-    "name": "test",
-    "type": "tcp",
+    "autoTls": "false",
+    "custom": "",
+    "dataEncrypt": false,
+    "dataGzip": false,
+    "domain_bind": "",
+    "forceHttps": false,
     "local_addr": "127.0.0.1",
     "local_port": "25565",
+    "name": "test",
+    "node_id": 44,
+    "proxyProtocolVersion": false,
     "remote_port": 27388,
-    "domain_bind": "",
-    "dataGzip": false,
-    "dataEncrypt": false,
-    "url_route": "",
-    "host_rewrite": "",
-    "request_from": "",
-    "request_pass": "",
-    "custom": ""
+    "type": "tcp",
 }
 ```
 
 > *提交值解释：*
 > ``data`` 下的键值
-> 键名        | 值内容意
-> ----------- | ----------------------------  
-> node_id        | 节点ID(纯数字，整数型)
-> name       | 隧道名称(不支持中文)
-> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
-> local_addr     | 本地地址(默认可使用 ``127.0.0.1``)
-> local_port     | 本地端口
-> remote_port | 远程端口
-> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
-> dataGzip          | 是否启用数据压缩（``true``/``false``）
-> dataEncrypt       | 是否启用数据加密（``true``/``false``）
-> url_route         | URL路由
-> host_rewrite      | HOST重写
-> request_from      | 请求来源
-> request_pass      | 访问密码
-> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
+> 键名        | 值内容意 |
+> ----------- | ---------------------------- |
+> autoTls | 自动TLS（字符串，`"true"` `"false"` `"对应目录下证书名称"`） |
+> custom | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)） |
+> dataEncrypt | 是否启用数据加密（``true``/``false``） |
+> dataGzip | 是否启用数据压缩（``true``/``false``） |
+> domain_bind | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效） |
+> forceHttps | 是否强制使用HTTPS（``true``/``false``） |
+> local_addr | 本地地址(默认可使用 ``127.0.0.1``) |
+> local_port | 本地端口 |
+> name | 隧道名称(不支持中文) |
+> node_id | 节点ID(纯数字，整数型) |
+> proxyProtocolVersion | 是否启用 proxy 协议（``true``/``false``） |
+> remote_port | 远程端口 |
+> type | 隧道类型（包括: ``tcp udp http https stcp xtcp``） |
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -380,7 +379,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 > *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
 * 建议在新建隧道操作完成后，重新请求获取用户隧道列表。
-* 
+
 ***
 
 ## 5. 删除隧道 *``Header``*
@@ -548,49 +547,45 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/editProxy``
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/newProxy``
 
 请求内容：
 
-```json   
+```json
 {
-	"custom": null,
-	"dataEncrypt": false,
-	"dataGzip": false,
-	"domain_bind": null,
-	"host_rewrite": null,
-	"local_addr": "127.0.0.1",
-	"local_port": 22,
-	"name": "ssh1",
-	"node_id": 0,
-	"proxy_id": 49200,
-	"remote_port": 28020,
-	"request_from": null,
-	"request_pass": null,
-	"type": "tcp",
-	"url_route": null,
+    "autoTls": "false",
+    "custom": "",
+    "dataEncrypt": false,
+    "dataGzip": false,
+    "domain_bind": "",
+    "forceHttps": false,
+    "local_addr": "127.0.0.1",
+    "local_port": "25565",
+    "name": "test",
+    "node_id": 44,
+    "proxyProtocolVersion": false,
+    "remote_port": 27388,
+    "type": "tcp",
 }
 ```
 
 > *提交值解释：*
 > ``data`` 下的键值
-> 键名        | 值内容意
-> ----------- | ----------------------------  
-> custom            | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)）
-> dataEncrypt       | 是否启用数据加密（``true``/``false``）
-> dataGzip          | 是否启用数据压缩（``true``/``false``）
-> domain_bind     | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效）
-> host_rewrite      | HOST重写
-> local_addr     | 本地地址(默认可使用 ``127.0.0.1``)
-> local_port     | 本地端口
-> name       | 隧道名称(不支持中文)
-> node_id        | 节点ID(纯数字，整数型)
-> proxy_id       | 隧道ID(纯数字，整数型)
-> remote_port | 远程端口
-> request_from      | 请求来源
-> request_pass      | 访问密码
-> type    | 隧道类型（包括: ``tcp udp http https stcp xtcp``）
-> url_route         | URL路由
+> 键名        | 值内容意 |
+> ----------- | ---------------------------- |
+> autoTls | 自动TLS（字符串，`"true"` `"false"` `"对应目录下证书名称"`） |
+> custom | 用户隧道的自定义配置文件（有关自定义配置文件请参考 [OpenFrp用户文档](https://docs.openfrp.net/use) 与 [gofrp官方文档](https://gofrp.org/docs)） |
+> dataEncrypt | 是否启用数据加密（``true``/``false``） |
+> dataGzip | 是否启用数据压缩（``true``/``false``） |
+> domain_bind | 绑定的域名（非HTTP/S隧道可留空不填，仅HTTP/S隧道有效） |
+> forceHttps | 是否强制使用HTTPS（``true``/``false``） |
+> local_addr | 本地地址(默认可使用 ``127.0.0.1``) |
+> local_port | 本地端口 |
+> name | 隧道名称(不支持中文) |
+> node_id | 节点ID(纯数字，整数型) |
+> proxyProtocolVersion | 是否启用 proxy 协议（``true``/``false``） |
+> remote_port | 远程端口 |
+> type | 隧道类型（包括: ``tcp udp http https stcp xtcp``） |
 
 在请求正常的情况下，您会得到以下返回值：
 
