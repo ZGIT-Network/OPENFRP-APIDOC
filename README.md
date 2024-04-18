@@ -452,6 +452,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 				"bandwidthMagnification": 1,
 				"classify": 2,
 				"comments": "双程CN2GIA CUVIP CMI",
+				"enableDefaultTls": true,
 				"group": "vip;svip;admin;dev",
 				"hostname": "您无权查询此节点的地址",
 				"id": 1,
@@ -479,6 +480,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 				"bandwidthMagnification": 1,
 				"classify": 2,
 				"comments": "去程HKBN 回程HKIX|CERA->CMI",
+				"enableDefaultTls": true,
 				"group": "vip;svip;admin;dev",
 				"hostname": "您无权查询此节点的地址",
 				"id": 2,
@@ -514,24 +516,25 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > ``data`` 数组的每一个组都代表一个节点的信息，键值均可使用本表参考。 ``total`` 值为OpenFrp当前节点总数。``list`` 既所有节点的详细信息
 > 键名        | 值内容意
 > ----------- | ----------------------------  
-> allowEc    | 是否允许弹性隧道* （尚未启用）
-> bandwidth        | 节点的带宽数
-> bandwidthMagnification       | 节点设计的带宽倍率（换算公式：用户速率*带宽倍率 = 实际获得速率）
-> classify    | 节点所属区域（``1`` 中国大陆、``2`` 港澳台地区、``3``海外地区 ）
-> comments     | 节点的标签（如：推荐建站 等）
-> group     | 当前节点所允许使用的用户组（normal即普通用户若用户的用户组不存在于此内容内，创建隧道会被服务器拒绝）
+> allowEc | 是否允许弹性隧道* （尚未启用）
+> bandwidth | 节点的带宽数
+> bandwidthMagnification | 节点设计的带宽倍率（换算公式：用户速率*带宽倍率 = 实际获得速率）
+> classify | 节点所属区域（``1`` 中国大陆、``2`` 港澳台地区、``3``海外地区 ）
+> comments | 节点的标签（如：推荐建站 等）
+> enableDefaultTls | 节点是否默认启用TLS
+> group | 当前节点所允许使用的用户组（normal即普通用户若用户的用户组不存在于此内容内，创建隧道会被服务器拒绝）
 > hostname | 节点所属主机名（节点域名）    或者    “您无权查询此节点的地址”
-> id     | 节点ID
-> maxOnlineMagnification          | 在线倍率
-> name       | 节点名称
-> needRealname    | 节点运行端口    或者    “您无权查询此节点的地址”
-> port       | 节点运行端口
-> status      | 节点状态（可参考[HTTP状态码](https://www.runoob.com/http/http-status-codes.html)）（200为正常）
-> unitcostEc  |   隧道单价
+> id | 节点ID
+> maxOnlineMagnification | 在线倍率
+> name | 节点名称
+> needRealname | 节点运行端口    或者    “您无权查询此节点的地址”
+> port | 节点运行端口
+> status | 节点状态（可参考[HTTP状态码](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)）（200为正常）
+> unitcostEc |   隧道单价
 > description | 节点介绍
 > protocolSupport | 节点所支持的隧道类型，更新为子元素单独显示(包括 ``tcp udp http https stcp xtcp`` 使用 ``true`` / ``false``作为区分是否准许，此处不再做详细解释)
-> allowPort  |  允许的端口（为null或者""则为无端口段限制，例如"``(50000,60000)``"则为远程端口限制在50000-60000之间均可使用）
-> fullyLoaded | 节点负载状态（ ``true`` / ``false`` 状态为 ``true`` 时节点满载不可，新建隧道）
+> allowPort |  允许的端口（为null或者""则为无端口段限制，例如"``(50000,60000)``"则为远程端口限制在50000-60000之间均可使用）
+> fullyLoaded | 节点负载状态（ ``true`` / ``false`` ，状态为 ``true`` 时节点满载不可新建隧道）
 
 ***
 
