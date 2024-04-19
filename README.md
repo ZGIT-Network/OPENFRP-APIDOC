@@ -542,7 +542,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 >API路径：/frp/api/editProxy
 
-* 此 API 可帮助您为用户当前账户新建一条新的隧道。**您需要搭配获取节点列表API使用，因为这样您才可以获取到节点ID**
+* 此 API 可能并不能帮助您为用户当前账户新建一条新的隧道。因为请求需要提供`proxy_id`，即隧道ID。
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
 
@@ -550,7 +550,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/newProxy``
+请求地址：``https://of-dev-api.bfsea.xyz/frp/api/editProxy``
 
 请求内容：
 
@@ -567,6 +567,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
     "name": "test",
     "node_id": 44,
     "proxyProtocolVersion": false,
+    "proxy_id":19198,
     "remote_port": 27388,
     "type": "tcp",
 }
@@ -587,6 +588,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > name | 隧道名称(不支持中文) |
 > node_id | 节点ID(纯数字，整数型) |
 > proxyProtocolVersion | 是否启用 proxy 协议（``true``/``false``） |
+> proxy_id | 隧道ID(纯数字，整数型) |
 > remote_port | 远程端口 |
 > type | 隧道类型（包括: ``tcp udp http https stcp xtcp``） |
 
