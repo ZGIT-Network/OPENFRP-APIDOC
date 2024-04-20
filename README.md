@@ -302,6 +302,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > proxyName | 此隧道名称（文本） |
 > proxyProtocolVersion | 此隧道是否启用 proxy协议（`true`/`false`） |
 > proxyType | 此隧道类型（`tcp` `udp` `http` `https` `stcp` `xtcp` 等） |
+> remotePort | 此隧道远程端口（仅非HTTP/S隧道，数字） |
 > lastUpdate | 此隧道最后一次修改的时间（Unix时间戳） |
 > lastLogin | 此隧道最后一次启动的时间（Unix时间戳，从未启动则返回`null`） |
 > localIp | 此隧道的本地IP地址 |
@@ -589,7 +590,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > node_id | 节点ID(纯数字，整数型) |
 > proxyProtocolVersion | 是否启用 proxy 协议（``true``/``false``） |
 > proxy_id | 隧道ID(纯数字，整数型) |
-> remote_port | 远程端口 |
+> remote_port | 远程端口(HTTP/S隧道可留空不填) |
 > type | 隧道类型（包括: ``tcp udp http https stcp xtcp``） |
 
 在请求正常的情况下，您会得到以下返回值：
