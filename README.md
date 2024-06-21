@@ -47,7 +47,7 @@
 
 **同时，您现在可以使用：**
 >**<https://api.openfrp.net>**
-请求API
+>来请求API
 
 您可通过在地址后添加路径来访问API，下文仅向您提供相关API路径以供您参考。
 
@@ -591,7 +591,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 > proxyProtocolVersion | 是否启用 proxy 协议（``true``/``false``） |
 > proxy_id | 隧道ID(纯数字，整数型) |
 > remote_port | 远程端口(HTTP/S隧道可留空不填) |
-> type | 隧道类型（包括: ``tcp udp http https stcp xtcp``） |
+> type | 隧道类型（包括: ``tcp udp http https``） |
 
 在请求正常的情况下，您会得到以下返回值：
 
@@ -605,12 +605,112 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 > *注意：此API返回值的 ``msg`` 项包含多种信息，其包括隧道创建是否成功的信息内容，需要注意。此API的 ``flag`` 项返回为是否创建成功，成功为 ``true``。*
 
+## 8.通过 token 获取隧道列表
 
-## 8. 签到 *``Header``*
+>API路径：/api?action=getallproxies&user=<用户密钥,token>
+
+* 此 API 仅可用于获取用户的 全部隧道 列表（JSON），可以以最简单方式使您的应用程式（Applications）接入到 OpenFrp。
+
+* 此 API 仅需 token 鉴权，仅可获取隧道基本信息。由于这个 API 曾经是给 TUI 设计的，故规范有所不同。
+
+>**此 API 已被我们应用于 Frpc 的 Terminal UI，可用于为您参考。相关原理为：**
+>
+>Frpc 发送请求获取隧道列表 -> 取要启动的隧道的 Proxy_id -> 通过 ez_startup(简易启动)直接启动隧道
+>
+>*有关简易启动，可参考[用户使用文档](https://openfrp.wiki/use/frpc.html#windows)。*
+>
+>*即 ``.\<frpc文件名> -u <用户密钥,token> -p <隧道ID>,<隧道ID>(若有多个可使用","分开，最后不要有",")``*
+
+
+### 请求示例
+
+请求类型：``GET``
+
+请求地址：``https://of-dev-api.bfsea.xyz/api?action=getallproxies&user=e900d8f2498202114ec2e9b0597dfb66``
+
+~~请求内容：~~ 此API为GET请求，无需提交 body。
+
+在请求正常的情况下，您会得到以下返回值：
+
+```json
+{
+    "status": 200,
+    "success": true,
+    "message": "上午好！Test",
+    "data": [
+        {
+            "node": "114514 # 演示节点1",
+            "proxies": [
+                {
+                    "name": "example1",
+                    "id": 11451,
+                    "type": "tcp",
+                    "remote": "1.example.com:11451",
+                    "local": "127.0.0.1:11451"
+                }
+            ]
+        },
+        {
+            "node": "114514 # 演示节点2",
+            "proxies": [
+                {
+                    "name": "example2",
+                    "id": 56456,
+                    "type": "udp",
+                    "remote": 2.example.com:11451",
+                    "local": "127.0.0.1:1"
+                },
+                {
+                    "name": "example3",
+                    "id": 494853,
+                    "type": "tcp",
+                    "remote": "2.example.com:61438",
+                    "local": "127.0.0.1:9797"
+                }
+            ]
+        },
+        {
+            "node": "114514 # 演示节点3",
+            "proxies": [
+                {
+                    "name": "example4",
+                    "id": 45645,
+                    "type": "tcp",
+                    "remote": "3.example.com:11451",
+                    "local": "127.0.0.1:1154"
+                }
+            ]
+        }
+    ]
+}
+```
+
+**因实际隧道列表JSON信息过长，本文仅截取部分作演示，并做修改**
+
+> *返回值解释：*
+>  ``status`` HTTP状态码
+> ``success`` 请求状态
+> ``message``代表登录日志信息
+> ``data`` 数组的每一个组都代表一个节点下的隧道，此API通过节点分类，将单个节点下的隧道分类列出。
+> 键值均可使用本表参考。``proxies`` 既此节点下的全部隧道列表。
+> 键名        | 值内容意
+> ----------- | ----------------------------
+> node | 节点名称
+> proxies | 此**节点名称**下的隧道列表
+> name | 隧道名称
+> id | 隧道ID ( proxy_id )
+> typc | 隧道类型（包括: ``tcp udp http https``）
+> remote | 远程地址（域名化） 也就是链接地址（譬如 cn-hk-bgp-4.of-7af93c01.shop:11451）
+> local | 本地地址（譬如 127.0.0.1:25565）
+
+***
+
+
+## 9. 签到 *``Header``*
 
 >API路径：/frp/api/userSign
 
-~~* 此 API 可帮助用户调用签到API签到获取流量。**注意：您不应该设计任何有关自动签到的相关功能，因为这是违反服务条款的行为，自动签到为滥用行为行为之一。**
+* 此 API 可帮助用户调用签到API签到获取流量。**注意：您不应该设计任何有关自动签到的相关功能，因为这是违反服务条款的行为，自动签到为滥用行为行为之一。**
 * **建议您在签到执行并获得回调后搭配获取用户信息API使用，以探测流量更新。**
 
 本 API 需要用户已登录，程序已获取用户的会话ID和Authorization验证，并将Authorization写入到header中。
