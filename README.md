@@ -120,7 +120,7 @@
     "flag": true
 }
 ```
-在收到返回的同时，您需要同时读取返回值**``Cookies``**中的``17a``及内容，并将其保存为变量备用。
+在收到返回的同时，您需要同时读取返回值``Cookies``中的``17a``及内容，并将其保存为变量备用。
 
 ### (2) 通过回调地址获取请求API需要的`code`
 
@@ -131,6 +131,8 @@
 请求地址：``https://openid.17a.ink/api/oauth2/authorize?response_type=code&redirect_uri=https://of-dev-api.bfsea.xyz/oauth_callback&client_id=openfrp``
 
 请求内容：无  
+
+Cookie：``17a=Z29fc2************cb99b2ddc``
 
 在请求正常的情况下，您会得到以下返回值：
 
