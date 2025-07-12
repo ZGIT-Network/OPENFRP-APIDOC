@@ -93,7 +93,7 @@
 
 请求类型：``POST``
 
-请求地址：``https://openid.17a.ink/api/public/login``
+请求地址：``https://account.naids.com/api/api/public/login``
 
 请求内容：
 
@@ -124,7 +124,7 @@
 
 请求类型：``POST``
 
-请求地址：``https://openid.17a.ink/api/oauth2/authorize?response_type=code&redirect_uri=https://of-dev-api.bfsea.xyz/oauth_callback&client_id=openfrp``
+请求地址：``https://account.naids.com/api/api/oauth2/authorize?response_type=code&redirect_uri=https://api.openfrp.net/oauth_callback&client_id=openfrp``
 
 请求内容：无  
 
@@ -148,7 +148,7 @@ Cookie：``17a=Z29fc2************cb99b2ddc``
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/oauth2/callback?code=``拼接上回调OAuth接口得到的`code`
+请求地址：``https://api.openfrp.net/oauth2/callback?code=``拼接上回调OAuth接口得到的`code`
 
 请求内容：无  
 
@@ -193,7 +193,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getUserInfo``
+请求地址：``https://api.openfrp.net/frp/api/getUserInfo``
 
 请求内容：无，仅需要您POST时附带Authorization即可。  
 
@@ -254,7 +254,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getUserProxies``
+请求地址：``https://api.openfrp.net/frp/api/getUserProxies``
 
 请求内容：无，仅需要您POST时附带Authorization即可。  
 
@@ -356,7 +356,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/newProxy``
+请求地址：``https://api.openfrp.net/frp/api/newProxy``
 
 请求内容：
 
@@ -423,7 +423,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/removeProxy``
+请求地址：``https://api.openfrp.net/frp/api/removeProxy``
 
 请求内容：
 
@@ -462,7 +462,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/getNodeList``
+请求地址：``https://api.openfrp.net/frp/api/getNodeList``
 
 请求内容：无，仅需要您POST时附带Authorization即可。  
 
@@ -579,7 +579,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``POST``
 
-请求地址：``https://of-dev-api.bfsea.xyz/frp/api/editProxy``
+请求地址：``https://api.openfrp.net/frp/api/editProxy``
 
 请求内容：
 
@@ -654,7 +654,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 请求类型：``GET``
 
-请求地址：``https://of-dev-api.bfsea.xyz/api?action=getallproxies&user=e900d8f2498202114ec2e9b0597dfb66``
+请求地址：``https://api.openfrp.net/api?action=getallproxies&user=e900d8f2498202114ec2e9b0597dfb66``
 
 ~~请求内容：~~ 此API为GET请求，无需提交 body。
 
@@ -750,7 +750,7 @@ OPENFRPeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZWE3MjIzZTgzZDA0ODJjYjc2
 
 ~~请求类型：``POST``~~
 
-~~请求地址：``https://of-dev-api.bfsea.xyz/frp/api/userSign``~~
+~~请求地址：``https://api.openfrp.net/frp/api/userSign``~~
 
 ~~请求内容：~~
 
