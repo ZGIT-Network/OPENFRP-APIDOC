@@ -48,19 +48,115 @@
 
 **目前, OpenFrp API地址为：**
 >**<https://api.openfrp.net>**
+>或者 **<https://of-dev-api.bfsea.com>**
 
 您可通过在地址后添加路径来访问API，下文仅向您提供相关API路径以供您参考。
 
 ***
 
-## 1. Authorization Login 安全登录
+## 1. Remote Login 远程安全登录
+
+### (1) 请求授权
+
+请求类型：``POST``
+
+请求地址：``https://access.openfrp.net/argoAccess/requestLogin``
+
+**注意：请务必定义退出逻辑，超出请求阈值将全部返回429**
+
+* 此方法需要使用 urve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+
+请求内容：[Body] (注意，以下内容用于实例，不可实际应用)
+
+```json
+{
+    "public_key": "v6rrxUpQ3-M1VFbs8q-pD2eQe84mmps_5kXneuQq5Bk="
+}
+```
+
+返回响应：
+
+```json
+{
+	"code":200,
+	"msg":"query ok",
+	"data":{
+		"authorization_url":"https://console.openfrp.net/usercenter?argoaccess=9a23ed00-07e6-4f11-bcfd-b0216e3bcacf",
+		"request_uuid":"9a23ed00-07e6-4f11-bcfd-b0216e3bcacf"
+	}
+}
+```
+
+> *返回值解释：*
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> code    | 状态码(200:成功/204:未授权/400:参数错误/404:授权不存在) *使用HTTP状态码
+> msg        | 消息
+> data       | 数据(null或者有数据)
+> data.authorization_url    | 授权URL,要求用户拉起浏览器打开
+> data.request_uuid     | 本次登录请求的UUID
+
+**uuid全局有效期5分钟，5分钟后任何操作都不会有效**
+
+
+### (2)轮询授权
+
+**请注意：此接口需要以轮询方式请求返回结果。**
+
+**轮询配置：推荐速率 1次/5s 请求最大时长 5分钟 超出5分钟后的请求将无效**
+
+请求类型：``POST``
+
+请求地址：``https://access.openfrp.net/argoAccess/requestLogin``
+
+**注意：请务必定义退出逻辑，超出请求阈值将全部返回429**
+
+* 此方法需要使用 urve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+
+请求内容：[Body] (注意，以下内容用于实例，不可实际应用)
+
+```json
+{
+    "request_uuid": "9a23ed00-07e6-4f11-bcfd-b0216e3bcacf"
+}
+```
+
+返回响应：
+
+```json
+{
+	"code":200,
+	"msg":"query ok",
+	"data":{
+		"authorization_data":"CqWR/qmS9j2VHXpKVjU4Tee/Rguubdi+cY81KKALgf/WPT+LIM6txOXsg20QAYgKdSmxveDF1ZeRwCR7HS4idKxI4kj2bDyWAl0hxWRUDph30AMPLA+T3z/aQOdDrZ5+",
+		"request_uuid":"9a23ed00-07e6-4f11-bcfd-b0216e3bcacf"
+	}
+}
+```
+
+> *返回值解释：*
+> 键名        | 值内容意
+> ----------- | ----------------------------  
+> code    | 状态码(200/400) *使用HTTP状态码
+> msg        | 消息
+> data       | 数据(null或者有数据)
+> data.authorization_data    | 服务器公钥，用于解密
+> data.request_uuid     | 本次登录请求的UUID
+
+解密完成后，您将获得 Authorization 的明文值，请将其保存。
+
+**uuid全局有效期5分钟，5分钟后任何操作都不会有效**
+
+
+
+## 2. Authorization Login 会话密钥登录
 
 **注意：这不是一个API接口，而是一种登录方式。并且我们并不推荐以此方式作为主要登录手段。**
 
-> [!IMPORTANT]
-> 优先推荐您使用本方法，因为他不需要保存用户的账号密码等个人信息。
-> 相对来说，通过此方法接入 API 更加简单、安全且方便。
+>[!WARNING]
+>优先推荐您使用 `Remote Login 远程安全登录` 所示方法，因为他更加安全。
 
+但是相对来说，通过此方法接入 API 更加简单、方便。
 
 在管理面板（241129_170432.5b6949a_rel 之后的构建）-个人中心中，新增 “第三方客户端安全登录” 功能。此功能可直接帮助用户获取当前登录状态下API鉴权的Authorization。
 
@@ -76,13 +172,10 @@
 
 
 
-## 2. Login 登录API
-
->API路径：
->/oauth2/callback?code=
+## 3. Login 拉起网页登录
 
 >[!WARNING]
->优先推荐您使用 `1. Security Login 安全登录` 所示方法，因为他更加简单且安全。
+>优先推荐您使用 `Remote Login 远程安全登录` 所示方法，因为他更加安全。
 
 
 > [!IMPORTANT]
@@ -90,8 +183,7 @@
 * 此 API 可帮助您通过账号密码登录到 OpenFrp，除获取节点信息和获取公告外，均需要登录获取会话ID与API认证信息才可用。
 
 
-
-现在不再提供基于账户密码的登录方式，请优先使用上述方案调用登录。
+**现在不再提供基于账户密码的登录方式，请优先使用上述方案调用登录。**
 
 
 ### (2) 通过回调地址获取请求API需要的`code`
