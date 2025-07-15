@@ -65,6 +65,7 @@
 **注意：请务必定义退出逻辑，超出请求阈值将全部返回429**
 
 * 此方法需要使用 curve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+* 在线密钥对生成测试：[sracc.com](https://sracc.com)
 
 请求内容：[Body] (注意，以下内容用于实例，不可实际应用)
 
@@ -105,13 +106,14 @@
 
 **轮询配置：推荐速率 1次/5s 请求最大时长 5分钟 超出5分钟后的请求将无效**
 
-请求类型：``POST``
+请求类型：``GET``
 
-请求地址：``https://access.openfrp.net/argoAccess/requestLogin``
+请求地址：``https://access.openfrp.net/argoAccess/pollLogin``
 
 **注意：请务必定义退出逻辑，超出请求阈值将全部返回429**
 
-* 此方法需要使用 urve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+* 此方法需要使用 urve25519 密钥，有关其方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+* 在线密钥对生成测试：[sracc.com](https://sracc.com)
 
 请求内容：[Body] (注意，以下内容用于实例，不可实际应用)
 
@@ -123,7 +125,16 @@
 
 返回响应：
 
-```json
+[header] (注意，以下内容用于实例，不可实际应用)
+```
+x-request-public-key: I9E_WWIGsvz1c_FDo_awTFIMAFR7r_tvKAe90iVKJGk=
+```
+
+**header中将返回服务器公钥，用于解密下方的 authorization_data**
+
+[body] (注意，以下内容用于实例，不可实际应用)
+```json 
+
 {
 	"code":200,
 	"msg":"query ok",
@@ -140,7 +151,7 @@
 > code    | 状态码(200/400) *使用HTTP状态码
 > msg        | 消息
 > data       | 数据(null或者有数据)
-> data.authorization_data    | 服务器公钥，用于解密
+> data.authorization_data    | Authorization 加密结果，需要经过解密
 > data.request_uuid     | 本次登录请求的UUID
 
 解密完成后，您将获得 Authorization 的明文值，请将其保存。
