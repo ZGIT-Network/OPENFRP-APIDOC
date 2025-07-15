@@ -64,7 +64,7 @@
 
 **注意：请务必定义退出逻辑，超出请求阈值将全部返回429**
 
-* 此方法需要使用 urve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
+* 此方法需要使用 curve25519 密钥，有关其生成方法，您可参考参考 [cloudflared/encrypt.go](https://github.com/cloudflare/cloudflared/blob/master/token/encrypt.go)
 
 请求内容：[Body] (注意，以下内容用于实例，不可实际应用)
 
